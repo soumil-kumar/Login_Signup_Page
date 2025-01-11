@@ -4,7 +4,8 @@ import './Signup.css'
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import axios from 'axios'
 
-function Signup() {
+function Login()
+{
   const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -12,29 +13,22 @@ function Signup() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    axios.post('http://localhost:3001/signup', {name, email, password})
-    .then(result => {console.log(result)
-    navigate('/login')})
+    axios.post('http://localhost:3001/login', {email, password})
+    .then(result => {
+      console.log(result)
+      if(result.data === "Success")
+      {
+        navigate('https://www.google.co.in')
+      }
+    })
     .catch(err => console.log(err))
   }
 
   return (
     <div class="container">
       <div class="form-container">
-        <h2>Signup</h2>
+        <h2>Login</h2>
         <form>
-          <div class="form-group">
-            <label for="name"><strong>Username</strong></label>
-            <input 
-              type="text" 
-              id="name" 
-              class="input-box" 
-              autocomplete="off" 
-              placeholder="Enter Name" 
-              name="Name"
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>
           <div class="form-group">
             <label for="email"><strong>Email</strong></label>
             <input 
@@ -60,12 +54,12 @@ function Signup() {
             />
           </div>
           <button type="submit" class="btn btn-success">
-            Register
+            Login
           </button>
           <p>
-            Already have an account?
-            <Link to="/login" class = "login-link">
-              Login
+            Create new account?
+            <Link to="/signup" class = "login-link">
+              Signup
             </Link>
           </p>
         </form>
@@ -73,4 +67,5 @@ function Signup() {
     </div>
   )
 }
-export default Signup;
+
+export default Login

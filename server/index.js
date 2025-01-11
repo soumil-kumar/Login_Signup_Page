@@ -30,7 +30,7 @@ app.post('./login', (req,res) =>{
   })
 })
 
-app.post('./register', (req,res) =>{
+app.post('./signup', (req,res) =>{
   UserModel.create(req.body)
   .then(User => res.json(User))
   .catch(err => res.json(err))
